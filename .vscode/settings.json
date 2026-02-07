@@ -1,5 +1,16 @@
 {
     "css.lint.unknownAtRules": "ignore",
     "scss.lint.unknownAtRules": "ignore",
-    "less.lint.unknownAtRules": "ignore"
+    "less.lint.unknownAtRules": "ignore",
+    "C_Cpp.default.includePath": [
+        "${workspaceFolder}/**",
+        "c:/Users/lian.mendes/.gemini/antigravity/scratch/ProdControl/jdk-21.0.10/include",
+        "c:/Users/lian.mendes/.gemini/antigravity/scratch/ProdControl/jdk-21.0.10/include/win32",
+        "c:/Users/lian.mendes/.gemini/antigravity/scratch/ProdControl/jdk-21.0.10/include/win32/bridge"
+    ],
+    "C_Cpp.default.systemIncludePath": [
+        "c:/Users/lian.mendes/.gemini/antigravity/scratch/ProdControl/jdk-21.0.10/include",
+        "c:/Users/lian.mendes/.gemini/antigravity/scratch/ProdControl/jdk-21.0.10/include/win32"
+    ],
+    "C_Cpp.intelliSenseEngine": "Tag Parser"
 }
