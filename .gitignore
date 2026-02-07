@@ -1,0 +1,165 @@
+# ============================================
+# ProdControl - Git Ignore Configuration
+# ============================================
+
+# ============================================
+# JDK e Maven (ferramentas de desenvolvimento)
+# ============================================
+jdk/
+jdk-*/
+apache-maven-*/
+*.zip
+
+# ============================================
+# Backend (Spring Boot / Java)
+# ============================================
+prodcontrol-backend/target/
+prodcontrol-backend/.mvn/
+prodcontrol-backend/mvnw
+prodcontrol-backend/mvnw.cmd
+prodcontrol-backend/.classpath
+prodcontrol-backend/.project
+prodcontrol-backend/.settings/
+prodcontrol-backend/.factorypath
+prodcontrol-backend/bin/
+prodcontrol-backend/build/
+prodcontrol-backend/out/
+prodcontrol-backend/.gradle/
+prodcontrol-backend/gradle/
+prodcontrol-backend/gradlew
+prodcontrol-backend/gradlew.bat
+
+# Arquivos de log do backend
+prodcontrol-backend/*.log
+prodcontrol-backend/logs/
+prodcontrol-backend/spring.log
+
+# ============================================
+# Frontend (React + Vite)
+# ============================================
+prodcontrol-frontend/node_modules/
+prodcontrol-frontend/dist/
+prodcontrol-frontend/build/
+prodcontrol-frontend/.vite/
+prodcontrol-frontend/.cache/
+prodcontrol-frontend/coverage/
+
+# Logs do frontend
+prodcontrol-frontend/npm-debug.log*
+prodcontrol-frontend/yarn-debug.log*
+prodcontrol-frontend/yarn-error.log*
+prodcontrol-frontend/pnpm-debug.log*
+prodcontrol-frontend/lerna-debug.log*
+
+# ============================================
+# IDEs e Editores
+# ============================================
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Eclipse
+.metadata/
+.recommenders/
+RemoteSystemsTempFiles/
+
+# VSCode (manter apenas settings.json se necessário)
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# NetBeans
+nbproject/private/
+nbbuild/
+nbdist/
+.nb-gradle/
+
+# ============================================
+# Sistema Operacional
+# ============================================
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Linux
+*~
+.directory
+
+# ============================================
+# Arquivos Temporários e de Backup
+# ============================================
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~.nib
+*.orig
+
+# ============================================
+# Banco de Dados Local
+# ============================================
+*.db
+*.sqlite
+*.sqlite3
+*.h2.db
+*.mv.db
+*.trace.db
+
+# ============================================
+# Variáveis de Ambiente e Configurações Sensíveis
+# ============================================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+application-local.properties
+application-dev.properties
+application-secrets.properties
+
+# ============================================
+# Arquivos Grandes e Binários
+# ============================================
+*.jar
+*.war
+*.ear
+*.nar
+*.class
+*.exe
+*.dll
+*.so
+*.dylib
+
+# ============================================
+# Testes e Cobertura
+# ============================================
+*.coverage
+.nyc_output/
+htmlcov/
+.pytest_cache/
+.tox/
+
+# ============================================
+# Outros
+# ============================================
+*.pid
+*.seed
+*.pid.lock
+.npm
+.eslintcache
+.node_repl_history
+.yarn-integrity
