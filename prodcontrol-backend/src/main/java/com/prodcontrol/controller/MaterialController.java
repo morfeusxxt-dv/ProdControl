@@ -4,6 +4,7 @@ import com.prodcontrol.domain.Material;
 import com.prodcontrol.repository.MaterialRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.DecimalMin;
@@ -14,6 +15,15 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/materials")
+@CrossOrigin(
+    origins = {
+        "https://prodcontrol-lian-git-main-morfeusxxts-projects.vercel.app",
+        "https://*.vercel.app"
+    },
+    methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS},
+    allowedHeaders = "*",
+    maxAge = 3600
+)
 public class MaterialController {
 
     private final MaterialRepository materialRepository;
