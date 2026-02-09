@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import api from '../services/api';
 import Layout from '../components/Layout';
 import { Plus, Tags } from 'lucide-react';
+import { RenderNotification } from '../components/RenderNotification';
+import { useRenderNotification } from '../hooks/useRenderNotification';
 
 interface Product {
     id: string;
@@ -15,12 +17,15 @@ const Products: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [showModal, setShowModal] = useState(false);
     const [newProduct, setNewProduct] = useState({ name: '', unitPrice: 0, stockQuantity: 0 });
+    
+    const { showNotification, handleApiError, hideNotification } = useRenderNotification();
 
     const fetchProducts = async () => {
         try {
             const response = await api.get('/products');
             setProducts(response.data);
         } catch (error) {
+            handleApiError(error);
             console.error("Error loading products", error);
         }
     };
@@ -40,12 +45,14 @@ const Products: React.FC = () => {
             setShowModal(false);
             fetchProducts();
         } catch (error) {
+            handleApiError(error);
             console.error("Error creating product", error);
         }
     };
 
     return (
         <Layout>
+            <RenderNotification isVisible={showNotification} onClose={hideNotification} />
             <div className="flex justify-between items-center mb-8">
                 <div>
                     <h1 className="text-2xl font-bold text-gray-800">Produtos</h1>

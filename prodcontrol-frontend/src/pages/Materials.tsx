@@ -3,6 +3,8 @@ import api from '../services/api';
 import Layout from '../components/Layout';
 import { Plus, Search, Filter } from 'lucide-react';
 import { getErrorMessage } from '../services/errorHandler';
+import { RenderNotification } from '../components/RenderNotification';
+import { useRenderNotification } from '../hooks/useRenderNotification';
 
 interface Material {
     id: string;
@@ -17,6 +19,8 @@ const Materials: React.FC = () => {
     const [showModal, setShowModal] = useState(false);
     const [newMaterial, setNewMaterial] = useState({ name: '', unitCost: 0, stockQuantity: 0, description: '' });
     const [error, setError] = useState<string | null>(null);
+    
+    const { showNotification, handleApiError, hideNotification } = useRenderNotification();
 
     const fetchMaterials = async () => {
         try {
@@ -24,6 +28,7 @@ const Materials: React.FC = () => {
             const response = await api.get('/materials');
             setMaterials(response.data);
         } catch (error) {
+            handleApiError(error);
             const errorMessage = getErrorMessage(error);
             setError(errorMessage);
             console.error("Error loading materials", error);
@@ -54,6 +59,7 @@ const Materials: React.FC = () => {
 
     return (
         <Layout>
+            <RenderNotification isVisible={showNotification} onClose={hideNotification} />
             {error && (
                 <div className="mb-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
                     {error}

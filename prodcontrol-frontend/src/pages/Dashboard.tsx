@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import api from '../services/api';
 import { ShoppingCart, Package, TrendingUp, AlertTriangle } from 'lucide-react';
 import Layout from '../components/Layout';
+import { RenderNotification } from '../components/RenderNotification';
+import { useRenderNotification } from '../hooks/useRenderNotification';
 
 interface Order {
     id: string;
@@ -19,6 +21,8 @@ const Dashboard: React.FC = () => {
         lowStockItems: 0,
         revenue: 0
     });
+    
+    const { showNotification, handleApiError, hideNotification } = useRenderNotification();
 
     useEffect(() => {
         const loadData = async () => {
@@ -35,6 +39,7 @@ const Dashboard: React.FC = () => {
                     revenue: 12500.00 // Mock
                 });
             } catch (error) {
+                handleApiError(error);
                 console.error(error);
             }
         };
@@ -58,6 +63,7 @@ const Dashboard: React.FC = () => {
 
     return (
         <Layout>
+            <RenderNotification isVisible={showNotification} onClose={hideNotification} />
             <div className="mb-8">
                 <h1 className="text-2xl font-bold text-gray-800">Dashboard</h1>
                 <p className="text-gray-500">Visão geral da produção</p>
