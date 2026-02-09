@@ -4,15 +4,8 @@ FROM eclipse-temurin:17
 # Set working directory
 WORKDIR /app
 
-# Copy visible files first
-COPY pom.xml ./
-COPY Dockerfile* ./
-COPY render.yaml ./
-COPY src ./src
-
-# Copy hidden files explicitly
-COPY mvnw ./
-COPY .mvn ./.mvn
+# Copy all files (without .dockerignore)
+COPY . .
 
 # Make mvnw executable
 RUN chmod +x ./mvnw
