@@ -6,7 +6,7 @@ import Layout from '../components/Layout';
 interface Order {
     id: string;
     product: { name: string };
-    quantity: number;
+    quantity: string;
     status: string;
     createdAt: string;
 }
@@ -21,26 +21,26 @@ const Dashboard: React.FC = () => {
     });
 
     useEffect(() => {
+        const loadData = async () => {
+            try {
+                const ordersRes = await api.get('/orders');
+                setOrders(ordersRes.data);
+
+                // Calculate dummy stats for now
+                const pending = ordersRes.data.filter((o: Order) => o.status === 'PENDING').length;
+                setStats({
+                    totalOrders: ordersRes.data.length,
+                    pendingOrders: pending,
+                    lowStockItems: 3, // Mock
+                    revenue: 12500.00 // Mock
+                });
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
         loadData();
     }, []);
-
-    const loadData = async () => {
-        try {
-            const ordersRes = await api.get('/orders');
-            setOrders(ordersRes.data);
-
-            // Calculate dummy stats for now
-            const pending = ordersRes.data.filter((o: Order) => o.status === 'PENDING').length;
-            setStats({
-                totalOrders: ordersRes.data.length,
-                pendingOrders: pending,
-                lowStockItems: 3, // Mock
-                revenue: 12500.00 // Mock
-            });
-        } catch (error) {
-            console.error(error);
-        }
-    };
 
     const StatusBadge = ({ status }: { status: string }) => {
         const styles = {

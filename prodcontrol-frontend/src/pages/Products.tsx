@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import api from '../services/api';
 import Layout from '../components/Layout';
-import { Plus, Search, Tags } from 'lucide-react';
+import { Plus, Tags } from 'lucide-react';
 
 interface Product {
     id: string;
     name: string;
     description: string;
-    unitPrice: number;
-    stockQuantity: number;
+    unitPrice: string;
+    stockQuantity: string;
 }
 
 const Products: React.FC = () => {
@@ -16,11 +16,7 @@ const Products: React.FC = () => {
     const [showModal, setShowModal] = useState(false);
     const [newProduct, setNewProduct] = useState({ name: '', unitPrice: 0, stockQuantity: 0 });
 
-    useEffect(() => {
-        loadProducts();
-    }, []);
-
-    const loadProducts = async () => {
+    const fetchProducts = async () => {
         try {
             const response = await api.get('/products');
             setProducts(response.data);
@@ -29,13 +25,20 @@ const Products: React.FC = () => {
         }
     };
 
+    useEffect(() => {
+        const loadProducts = async () => {
+            await fetchProducts();
+        };
+        loadProducts();
+    }, []);
+
     const handleCreate = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
             await api.post('/products', newProduct);
             setNewProduct({ name: '', unitPrice: 0, stockQuantity: 0 });
             setShowModal(false);
-            loadProducts();
+            fetchProducts();
         } catch (error) {
             console.error("Error creating product", error);
         }
@@ -63,7 +66,7 @@ const Products: React.FC = () => {
                             <div className="p-3 bg-indigo-50 text-indigo-600 rounded-lg group-hover:bg-indigo-600 group-hover:text-white transition-colors">
                                 <Tags size={24} />
                             </div>
-                            <span className="text-lg font-bold text-gray-900">R$ {product.unitPrice.toFixed(2)}</span>
+                            <span className="text-lg font-bold text-gray-900">R$ {parseFloat(product.unitPrice).toFixed(2)}</span>
                         </div>
                         <h3 className="text-lg font-semibold text-gray-800 mb-2">{product.name}</h3>
                         <p className="text-gray-500 text-sm mb-4 line-clamp-2">{product.description || 'Sem descrição definida.'}</p>

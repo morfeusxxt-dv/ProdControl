@@ -2,47 +2,63 @@ import React, { useEffect, useState } from 'react';
 import api from '../services/api';
 import Layout from '../components/Layout';
 import { Plus, Search, Filter } from 'lucide-react';
+import { getErrorMessage } from '../services/errorHandler';
 
 interface Material {
     id: string;
     name: string;
     description: string;
-    unitCost: number;
-    stockQuantity: number;
+    unitCost: string;
+    stockQuantity: string;
 }
 
 const Materials: React.FC = () => {
     const [materials, setMaterials] = useState<Material[]>([]);
     const [showModal, setShowModal] = useState(false);
     const [newMaterial, setNewMaterial] = useState({ name: '', unitCost: 0, stockQuantity: 0, description: '' });
+    const [error, setError] = useState<string | null>(null);
 
-    useEffect(() => {
-        loadMaterials();
-    }, []);
-
-    const loadMaterials = async () => {
+    const fetchMaterials = async () => {
         try {
+            setError(null);
             const response = await api.get('/materials');
             setMaterials(response.data);
         } catch (error) {
+            const errorMessage = getErrorMessage(error);
+            setError(errorMessage);
             console.error("Error loading materials", error);
         }
     };
 
+    useEffect(() => {
+        const loadMaterials = async () => {
+            await fetchMaterials();
+        };
+        loadMaterials();
+    }, []);
+
     const handleCreate = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
+            setError(null);
             await api.post('/materials', newMaterial);
             setNewMaterial({ name: '', unitCost: 0, stockQuantity: 0, description: '' });
             setShowModal(false);
-            loadMaterials();
+            fetchMaterials();
         } catch (error) {
+            const errorMessage = getErrorMessage(error);
+            setError(errorMessage);
             console.error("Error creating material", error);
         }
     };
 
     return (
         <Layout>
+            {error && (
+                <div className="mb-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+                    {error}
+                </div>
+            )}
             <div className="flex justify-between items-center mb-8">
                 <div>
                     <h1 className="text-2xl font-bold text-gray-800">Matérias-Primas</h1>
@@ -86,9 +102,9 @@ const Materials: React.FC = () => {
                             <tr key={material.id} className="hover:bg-gray-50 group">
                                 <td className="px-6 py-4 font-medium text-gray-900">{material.name}</td>
                                 <td className="px-6 py-4">{material.description || '-'}</td>
-                                <td className="px-6 py-4 text-right">R$ {material.unitCost.toFixed(2)}</td>
+                                <td className="px-6 py-4 text-right">R$ {parseFloat(material.unitCost).toFixed(2)}</td>
                                 <td className="px-6 py-4 text-right">
-                                    <span className={`px-2 py-1 rounded text-xs font-medium ${material.stockQuantity < 100 ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
+                                    <span className={`px-2 py-1 rounded text-xs font-medium ${parseFloat(material.stockQuantity) < 100 ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
                                         {material.stockQuantity}
                                     </span>
                                 </td>
