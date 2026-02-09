@@ -37,19 +37,34 @@ public class OrderController {
         return orderRepository.findAll();
     }
 
-    @PostMapping
-    public ResponseEntity<ProductionOrder> create(@RequestBody OrderCreateRequest request) {
-        Product product = productRepository.findById(request.productId())
-                .orElseThrow(() -> new RuntimeException("Product not found: " + request.productId()));
+    @PostMapping("/test")
+    public ResponseEntity<ProductionOrder> createTestOrder() {
+        try {
+            // Criar produto padrão se não existir
+            Product product = productRepository.findAll().isEmpty() ? 
+                createDefaultProduct() : 
+                productRepository.findAll().get(0);
 
-        ProductionOrder order = new ProductionOrder();
-        order.setProduct(product);
-        order.setQuantity(request.quantity());
-        order.setStatus(com.prodcontrol.domain.ProductionStatus.PENDING);
-        order.setCreatedAt(java.time.LocalDateTime.now());
+            ProductionOrder order = new ProductionOrder();
+            order.setProduct(product);
+            order.setQuantity(new java.math.BigDecimal("10"));
+            order.setStatus(com.prodcontrol.domain.ProductionStatus.PENDING);
+            order.setCreatedAt(java.time.LocalDateTime.now());
 
-        ProductionOrder saved = orderRepository.save(order);
-        return ResponseEntity.ok(saved);
+            ProductionOrder saved = orderRepository.save(order);
+            return ResponseEntity.ok(saved);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).build();
+        }
+    }
+
+    private Product createDefaultProduct() {
+        Product product = new Product();
+        product.setName("Produto Padrão");
+        product.setDescription("Produto criado automaticamente para teste");
+        product.setUnitPrice(new java.math.BigDecimal("100.00"));
+        product.setStockQuantity(new java.math.BigDecimal("1000"));
+        return productRepository.save(product);
     }
 
     @PutMapping("/{id}/start")
