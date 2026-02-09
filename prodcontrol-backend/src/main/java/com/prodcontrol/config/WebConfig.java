@@ -12,6 +12,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addMapping("/api/**")
                 .allowedOrigins(
                     "https://prodcontrol-lian-git-main-morfeusxxts-projects.vercel.app",
+                    "https://prod-control-morfeusxxts-projects.vercel.app",
                     "https://*.vercel.app",
                     "http://localhost:3000"
                 )
