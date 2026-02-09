@@ -25,7 +25,7 @@ export const testConnection = async () => {
         console.log('✅ Resposta do backend:', response.data);
         return response.data;
     } catch (error) {
-        console.error('❌ Erro na conexão:', error.message);
+        console.error('❌ Erro na conexão:', (error as Error).message);
         
         // Tentar novamente após 2 segundos
         setTimeout(() => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { testConnection } from '../services/api-debug';
 
-function TestAPI() {
+const TestAPI: React.FC = () => {
     const [status, setStatus] = useState('Testando...');
     const [logs, setLogs] = useState<string[]>([]);
 
@@ -13,7 +13,7 @@ function TestAPI() {
                 setLogs(prev => [...prev, `✅ Backend respondeu: ${JSON.stringify(result)}`]);
             } catch (error: any) {
                 setStatus('❌ Erro de conexão');
-                setLogs(prev => [...prev, `❌ Erro: ${error.message}`]);
+                setLogs(prev => [...prev, `❌ Erro: ${(error as Error).message}`]);
             }
         };
 
@@ -57,6 +57,6 @@ function TestAPI() {
             </div>
         </div>
     );
-}
+};
 
 export default TestAPI;
