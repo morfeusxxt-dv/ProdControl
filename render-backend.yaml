@@ -1,14 +1,12 @@
 services:
   - type: web
     name: prodcontrol-backend
-    env: java
+    env: docker
     plan: free
     rootDir: prodcontrol-backend
-    buildCommand: ./mvnw clean package -DskipTests
-    startCommand: java -jar target/prodcontrol-backend-0.0.1-SNAPSHOT.jar
+    dockerContext: .
+    dockerfilePath: ./Dockerfile
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: production
-      - key: JAVA_OPTS
-        value: "-Xmx512m"
     healthCheckPath: /actuator/health
