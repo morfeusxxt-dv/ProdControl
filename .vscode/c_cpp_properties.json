@@ -3,10 +3,7 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/**",
-                "c:\\Users\\lian.mendes\\.gemini\\antigravity\\scratch\\ProdControl\\jdk-21.0.10\\include",
-                "c:\\Users\\lian.mendes\\.gemini\\antigravity\\scratch\\ProdControl\\jdk-21.0.10\\include\\win32",
-                "c:\\Users\\lian.mendes\\.gemini\\antigravity\\scratch\\ProdControl\\jdk-21.0.10\\include\\win32\\bridge"
+                "${workspaceFolder}/**"
             ],
             "defines": [
                 "_DEBUG",
@@ -20,9 +17,7 @@
             "intelliSenseMode": "windows-msvc-x64",
             "browse": {
                 "path": [
-                    "c:\\Users\\lian.mendes\\.gemini\\antigravity\\scratch\\ProdControl\\jdk-21.0.10\\include",
-                    "c:\\Users\\lian.mendes\\.gemini\\antigravity\\scratch\\ProdControl\\jdk-21.0.10\\include\\win32",
-                    "c:\\Users\\lian.mendes\\.gemini\\antigravity\\scratch\\ProdControl\\jdk-21.0.10\\include\\win32\\bridge"
+                    "${workspaceFolder}/**"
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""

@@ -3,14 +3,32 @@
     "scss.lint.unknownAtRules": "ignore",
     "less.lint.unknownAtRules": "ignore",
     "C_Cpp.default.includePath": [
-        "${workspaceFolder}/**",
-        "c:/Users/lian.mendes/.gemini/antigravity/scratch/ProdControl/jdk-21.0.10/include",
-        "c:/Users/lian.mendes/.gemini/antigravity/scratch/ProdControl/jdk-21.0.10/include/win32",
-        "c:/Users/lian.mendes/.gemini/antigravity/scratch/ProdControl/jdk-21.0.10/include/win32/bridge"
+        "${workspaceFolder}/**"
     ],
-    "C_Cpp.default.systemIncludePath": [
-        "c:/Users/lian.mendes/.gemini/antigravity/scratch/ProdControl/jdk-21.0.10/include",
-        "c:/Users/lian.mendes/.gemini/antigravity/scratch/ProdControl/jdk-21.0.10/include/win32"
+    "C_Cpp.default.systemIncludePath": [],
+    "files.exclude": {
+        "**/jdk-21.0.10": true,
+        "**/jdk-21.0.10/**": true,
+        "**/apache-maven-3.9.6": true,
+        "**/apache-maven-3.9.6/**": true,
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },
+    "C_Cpp.files.exclude": {
+        "**/jdk-21.0.10": true,
+        "**/jdk-21.0.10/**": true,
+        "**/apache-maven-3.9.6": true,
+        "**/apache-maven-3.9.6/**": true
+    },
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-21",
+            "path": "c:/Users/lian.mendes/Desktop/ProdControl/jdk-21.0.10",
+            "default": true
+        }
     ],
-    "C_Cpp.intelliSenseEngine": "Tag Parser"
+    "C_Cpp.intelliSenseEngine": "Tag Parser",
+    "java.compile.nullAnalysis.mode": "automatic"
 }
