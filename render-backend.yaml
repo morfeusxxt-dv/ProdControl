@@ -5,7 +5,7 @@ services:
     plan: free
     rootDir: prodcontrol-backend
     dockerContext: .
-    dockerfilePath: ./Dockerfile
+    dockerfilePath: ./Dockerfile.prod
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: production
