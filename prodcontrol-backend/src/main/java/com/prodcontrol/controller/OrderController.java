@@ -45,7 +45,7 @@ public class OrderController {
         order.setProduct(product);
         order.setQuantity(request.quantity());
         order.setStatus(com.prodcontrol.domain.ProductionStatus.PENDING);
-        order.setCreatedAt(new java.util.Date());
+        order.setCreatedAt(java.time.LocalDateTime.now());
 
         ProductionOrder saved = orderRepository.save(order);
         return ResponseEntity.ok(saved);
@@ -80,6 +80,6 @@ public class OrderController {
 
     public record OrderCreateRequest(
             UUID productId,
-            Integer quantity
+            java.math.BigDecimal quantity
     ) {}
 }
