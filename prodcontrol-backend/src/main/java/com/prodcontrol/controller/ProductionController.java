@@ -1,11 +1,13 @@
 package com.prodcontrol.controller;
 
 import com.prodcontrol.domain.ProductionOrder;
+import com.prodcontrol.repository.ProductionOrderRepository;
 import com.prodcontrol.service.ProductionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -13,9 +15,16 @@ import java.util.UUID;
 public class ProductionController {
 
     private final ProductionService productionService;
+    private final ProductionOrderRepository productionOrderRepository;
 
-    public ProductionController(ProductionService productionService) {
+    public ProductionController(ProductionService productionService, ProductionOrderRepository productionOrderRepository) {
         this.productionService = productionService;
+        this.productionOrderRepository = productionOrderRepository;
+    }
+
+    @GetMapping
+    public List<ProductionOrder> getAll() {
+        return productionOrderRepository.findAll();
     }
 
     @PostMapping
