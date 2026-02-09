@@ -13,6 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins(
                     "https://prodcontrol-lian-git-main-morfeusxxts-projects.vercel.app",
                     "https://prod-control-morfeusxxts-projects.vercel.app",
+                    "https://prodcontrol-lian.vercel.app",
                     "https://*.vercel.app",
                     "http://localhost:3000"
                 )

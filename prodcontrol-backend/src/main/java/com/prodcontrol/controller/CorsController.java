@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
     origins = {
         "https://prodcontrol-lian-git-main-morfeusxxts-projects.vercel.app",
         "https://prod-control-morfeusxxts-projects.vercel.app",
+        "https://prodcontrol-lian.vercel.app",
         "https://*.vercel.app"
     },
     methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS},
