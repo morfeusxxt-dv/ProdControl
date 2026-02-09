@@ -4,11 +4,18 @@ FROM eclipse-temurin:17
 # Set working directory
 WORKDIR /app
 
-# Copy all files
-COPY . .
+# Copy visible files first
+COPY pom.xml ./
+COPY Dockerfile* ./
+COPY render.yaml ./
+COPY src ./src
 
-# Check if mvnw exists and make it executable
-RUN if [ -f ./mvnw ]; then chmod +x ./mvnw; else echo "mvnw not found"; ls -la; fi
+# Copy hidden files explicitly
+COPY mvnw ./
+COPY .mvn ./.mvn
+
+# Make mvnw executable
+RUN chmod +x ./mvnw
 
 # Build the application
 RUN ./mvnw clean package -DskipTests
