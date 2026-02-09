@@ -4,11 +4,11 @@ FROM eclipse-temurin:17
 # Set working directory
 WORKDIR /app
 
-# Copy all files first
+# Copy all files
 COPY . .
 
-# Make mvnw executable
-RUN chmod +x ./mvnw
+# Check if mvnw exists and make it executable
+RUN if [ -f ./mvnw ]; then chmod +x ./mvnw; else echo "mvnw not found"; ls -la; fi
 
 # Build the application
 RUN ./mvnw clean package -DskipTests
