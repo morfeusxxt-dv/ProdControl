@@ -94,3 +94,11 @@ ProdControl/
 ## 📝 Licença
 
 Projeto desenvolvido para demonstração de habilidades em desenvolvimento full-stack.
+
+## ⚠️ Observação sobre o ambiente
+
+O backend está hospedado no Render em plano gratuito, que pode entrar em modo de hibernação após período de inatividade.
+
+Caso os dados apareçam zerados no dashboard, isso ocorre devido ao ambiente de demonstração.
+
+Para testes completos, utilize as funcionalidades de cadastro de matérias-primas, produtos e ordens.
